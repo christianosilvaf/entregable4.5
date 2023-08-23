@@ -14,18 +14,18 @@ return (
         <div className='w-4/4 flex flex-col gap-3'>
             <div>
                 <h2 className='font-bold my-1 text-indigo-700'>User:</h2> 
-                <div className='flex gap-2 items-center justify-stretch'>
+                <div className='flex gap-2 items-center justify-start'>
                     <img src={logouser} width = "25" height = "25"/>
                     <span className='font-medium'>{user.first_name+" "+user.last_name}</span>
                 </div>
             </div>
         
-            <div className='flex gap-2 items-center justify-stretch '>
+            <div className='flex gap-2 items-center justify-start '>
                 <img src={logoemail} width = "25" height = "25"/>
                 <span> {user.email} </span>
             </div>
         
-            <div className='flex gap-2 items-center justify-stretch'>
+            <div className='flex gap-2 items-center justify-start'>
                 <img src={logobirth} width = "25" height = "25"/>
                 <span>{user.birthday}</span>
             </div>
