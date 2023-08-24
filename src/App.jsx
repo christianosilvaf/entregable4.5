@@ -12,6 +12,7 @@ function App() {
   const [userList, setUserList]= useState([]);
   const [updatingUser, setUpdatingUser] = useState(null);
   const [userListSearched, setUserListSearched]=useState();
+  const [renderuser,setRenderuser]=useState(false);
 
   console.log(userList,typeof(userList))
 
@@ -66,7 +67,8 @@ function App() {
     let userslistsearched=[];
     for (let user of userList) {
       let userid=0;
-      const name=user.first_name.toLowerCase().split(" ");
+      const fullname=user.first_name+user.last_name
+      const name=fullname.toLowerCase().split(" ");
       for (let entries of name){
         console.log(typeof(nameuserArray.find((element)=>{if(element===entries){userid=user.id}})))
       }    
@@ -81,6 +83,12 @@ function App() {
       .then(({data})=> {list.push(data)})
       .catch((error)=> console.log(error))
       }
+    }
+
+    if(list.length=0){
+      setRenderuser(false)
+    } {
+      setRenderuser(true)
     }
 
     setUserListSearched(list);
@@ -139,7 +147,12 @@ function App() {
       <section className='grid gap-3 mx-auto my-2'>
         <h2 className='text-[25px] font-semibold drop-shadow-[0_0.5px_3px_rgba(255,255,255,1)] 
                         text-center text-indigo-700 '> THESE ARE OUR USERS ALREADY REGISTERED: </h2>
-        <UsersList userList={userList} userListSearched={userListSearched} deleteUser={deleteUser} handleUpdateUser={handleUpdateUser}/>
+        <UsersList 
+          userList={userList} 
+          renderuser={renderuser}
+          userListSearched={userListSearched} 
+          deleteUser={deleteUser} 
+          handleUpdateUser={handleUpdateUser}/>
                       
         
       </section>
