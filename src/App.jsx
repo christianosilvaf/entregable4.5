@@ -70,10 +70,11 @@ function App() {
       const fullname=user.first_name+user.last_name
       const name=fullname.toLowerCase().split(" ");
       for (let entries of name){
-        console.log(typeof(nameuserArray.find((element)=>{if(element===entries){userid=user.id}})))
+        nameuserArray.find((element)=>{if(element===entries){userid=user.id}})
       }    
       userslistsearched.push(userid); 
     }
+    console.log(userslistsearched)
     
     let list=[];
     for (let id of userslistsearched){
