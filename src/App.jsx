@@ -4,13 +4,17 @@ import './App.css'
 import Modalform from './components/Modalform';
 import UsersList from './components/UsersList';
 import empty_values from './shared/constant'
+import logolupa from '/lupa.svg'
 
 function App() {
 
   const [ShowModal, setShowModal] = useState(false);
   const [userList, setUserList]= useState([]);
   const [updatingUser, setUpdatingUser] = useState(null);
-  
+  const [userListSearched, setUserListSearched]=useState();
+
+  console.log(userList,typeof(userList))
+
   const URL="https://users-crud.academlo.tech";
 
   const getAllUsers= ()=>{
@@ -55,7 +59,35 @@ function App() {
     getAllUsers()
   }, [])
   
+  const handleSearchbar =(e)=>{
+    e.preventDefault();
+    const nameuser=e.target.searchbar.value.toLowerCase();
+    const nameuserArray=nameuser.split(" ");
+    let userslistsearched=[];
+    for (let user of userList) {
+      let userid=0;
+      const name=user.first_name.toLowerCase().split(" ");
+      for (let entries of name){
+        console.log(typeof(nameuserArray.find((element)=>{if(element===entries){userid=user.id}})))
+      }    
+      userslistsearched.push(userid); 
+    }
+    
+    let list=[];
+    for (let id of userslistsearched){
+      if(id!=0){
+      axios
+      .get(URL + `/users/${id}/`)
+      .then(({data})=> {list.push(data)})
+      .catch((error)=> console.log(error))
+      }
+    }
+
+    setUserListSearched(list);
   
+  }
+
+  console.log(userListSearched)
 
   return (
     <>
@@ -65,14 +97,24 @@ function App() {
         <span className='p-1 drop-shadow-[0_1px_5px_rgba(255,255,255,0.99)] 
                           text-[30px] font-bold animate-bounce'
                           > YOUR CREATE USER APP </span>
-        <form><div className='p-1 text-center'>
+        <form onSubmit={handleSearchbar}>
+            <div className='p-1 text-center grid gap-2'>
 
                 <label htmlFor='searchbar'>Type User Name to Search: </label>
-                <input  className="outline-none 
-                                    border-[2px] border-black/20 p-1 
-                                    rounded-md" 
+                <div className='flex gap-3'> 
+                  <input  className="outline-none w-[250px]  text-black
+                                    border-4 border-white/50 p-1 
+                                    rounded-md focus:border-double focus:border-4 focus:border-indigo-700/70 " 
                         id="searchbar" 
-                        type="text"/>
+                        name="searchbar"
+                        type="text"
+                        placeholder="Christian Silva..."/>
+                  <button className='flex border-solid border-2 border-white rounded-xl w-[40px] h-[40px] 
+                                      cursor-pointer justify-center items-center '
+                                      type="submit"> 
+                    <img src={logolupa} width = "20" height = "20" />
+                  </button>
+                </div>
             </div>
         </form>
 
@@ -97,7 +139,7 @@ function App() {
       <section className='grid gap-3 mx-auto my-2'>
         <h2 className='text-[25px] font-semibold drop-shadow-[0_0.5px_3px_rgba(255,255,255,1)] 
                         text-center text-indigo-700 '> THESE ARE OUR USERS ALREADY REGISTERED: </h2>
-        <UsersList userList={userList} deleteUser={deleteUser} handleUpdateUser={handleUpdateUser}/>
+        <UsersList userList={userList} userListSearched={userListSearched} deleteUser={deleteUser} handleUpdateUser={handleUpdateUser}/>
                       
         
       </section>

@@ -50,7 +50,7 @@ const Modalform = ({ShowModal,setShowModal,createUser,updatingUser,updateUser,se
                 <label className='text-indigo-700 font-medium' htmlFor='first_name'> First Name:</label>
                 <input  className="outline-none 
                                     border-[2px] border-black/20 p-1 
-                                    rounded-md sm:w-[325px] " 
+                                    rounded-md sm:w-[325px] focus:border-solid focus:border-2 focus:border-indigo-700/70 " 
                         id="first_name" 
                         type="text"
                         {...register("first_name")} 
@@ -61,7 +61,7 @@ const Modalform = ({ShowModal,setShowModal,createUser,updatingUser,updateUser,se
                 <label  className='text-indigo-700 font-medium' htmlFor='last_name'> Last Name:</label>
                 <input  className="outline-none 
                                     border-[2px] border-black/20 p-1 
-                                    rounded-md sm:w-[325px]" 
+                                    rounded-md sm:w-[325px] focus:border-solid focus:border-2 focus:border-indigo-700/70 " 
                                     id="last_name" 
                                     type="text"
                                     {...register("last_name")}
@@ -72,7 +72,7 @@ const Modalform = ({ShowModal,setShowModal,createUser,updatingUser,updateUser,se
                 <label  className='text-indigo-700 font-medium' htmlFor='email'> Email: </label>
                 <input  className="outline-none 
                                     border-[2px] border-black/20 p-1 
-                                    rounded-md sm:w-[325px]" 
+                                    rounded-md sm:w-[325px] focus:border-solid focus:border-2 focus:border-indigo-700/70 " 
                                     id="email" 
                                     type="text"
                                     {...register("email")}
@@ -83,7 +83,7 @@ const Modalform = ({ShowModal,setShowModal,createUser,updatingUser,updateUser,se
                 <label className='text-indigo-700 font-medium' htmlFor='password'> Password: </label>
                 <input  className="outline-none 
                                     border-[2px] border-black/20 p-1 
-                                    rounded-md sm:w-[325px]" 
+                                    rounded-md sm:w-[325px] focus:border-solid focus:border-2 focus:border-indigo-700/70 " 
                                     id="password" 
                                     type="text"
                                     {...register("password")}
@@ -94,7 +94,7 @@ const Modalform = ({ShowModal,setShowModal,createUser,updatingUser,updateUser,se
                 <label className='text-indigo-700 font-medium' htmlFor='birthday'>Birthday: </label>
                 <input  className="outline-none 
                                     border-[2px] border-black/20 p-1 
-                                    rounded-md sm:w-[325px]" 
+                                    rounded-md sm:w-[325px] focus:border-solid focus:border-2 focus:border-indigo-700/70 " 
                                     id="birthday" 
                                     type="date"
                                     {...register("birthday")}  

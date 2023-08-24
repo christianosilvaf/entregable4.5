@@ -7,10 +7,9 @@ import logouser from "/user.svg"
 
 const UserCard = ({user, deleteUser, handleUpdateUser}) => {
 
-    console.log(user.id);
 return (
     <article className='rounded-xl shadow-lg shadow-indigo-500/40 p-3 flex flex-col border border-indigo-500/10 w-[350px] gap-3 
-                        items-center hover:scale-[1.1] transition duration-500'>
+                        items-center hover:scale-[1.1] transition duration-500 sm:flex-row sm:justify-between'>
         <div className='w-4/4 flex flex-col gap-3'>
             <div>
                 <h2 className='font-bold my-1 text-indigo-700'>User:</h2> 
@@ -31,7 +30,7 @@ return (
             </div>
         </div>
             
-        <div className='flex justify-center items-center gap-4'>
+        <div className='flex sm:flex-col  justify-center items-center gap-4'>
             <button onClick={()=> handleUpdateUser(user)} className='border-2 border-indigo-700/20 rounded-2xl p-1'> 
                 <img src={logoPencil} width = "30" height = "30"/>
             </button>
