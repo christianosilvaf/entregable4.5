@@ -14,7 +14,6 @@ function App() {
   const [userListSearched, setUserListSearched]=useState();
   const [renderuser,setRenderuser]=useState(false);
 
-  console.log(userList,typeof(userList))
 
   const URL="https://users-crud.academlo.tech";
 
@@ -64,39 +63,37 @@ function App() {
     e.preventDefault();
     const nameuser=e.target.searchbar.value.toLowerCase();
     const nameuserArray=nameuser.split(" ");
+    
     let userslistsearched=[];
+
     for (let user of userList) {
       let userid=0;
-      const fullname=user.first_name+user.last_name
+      const fullname=user.first_name+user.last_name;
       const name=fullname.toLowerCase().split(" ");
+      
       for (let entries of name){
-        nameuserArray.find((element)=>{if(element===entries){userid=user.id}})
-      }    
-      userslistsearched.push(userid); 
-    }
-    console.log(userslistsearched)
-    
-    let list=[];
-    for (let id of userslistsearched){
-      if(id!=0){
-      axios
-      .get(URL + `/users/${id}/`)
-      .then(({data})=> {list.push(data)})
-      .catch((error)=> console.log(error))
+        nameuserArray.find((element)=>{if(element===entries){
+          userid=user.id
+
+          if(userid!=0){
+            axios.get(URL + `/users/${userid}/`)
+            .then(({data})=> userslistsearched.push(data))
+            .catch((error)=> console.log(error))
+          }
+          
+        }})          
       }
     }
 
-    if(list.length=0){
+    if(userslistsearched.length==0){
       setRenderuser(false)
     } {
-      setRenderuser(true)
+      setRenderuser(true);
+      setUserListSearched(userslistsearched);
     }
-
-    setUserListSearched(list);
   
   }
 
-  console.log(userListSearched)
 
   return (
     <>
