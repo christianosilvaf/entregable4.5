@@ -11,7 +11,7 @@ function App() {
   const [ShowModal, setShowModal] = useState(false);
   const [userList, setUserList]= useState([]);
   const [updatingUser, setUpdatingUser] = useState(null);
-  const [userListSearched, setUserListSearched]=useState();
+  const [userListSearched, setUserListSearched]=useState([]);
   const [renderuser,setRenderuser]=useState(false);
 
 
@@ -64,36 +64,42 @@ function App() {
     const nameuser=e.target.searchbar.value.toLowerCase();
     const nameuserArray=nameuser.split(" ");
     
-    let userslistsearched=[];
+    let usersfoundid=[];
+    let userlistfound=[];
 
-    for (let user of userList) {
-      let userid=0;
-      const fullname=user.first_name+user.last_name;
-      const name=fullname.toLowerCase().split(" ");
-      
-      for (let entries of name){
-        nameuserArray.find((element)=>{if(element===entries){
-          userid=user.id
-
-          if(userid!=0){
-            axios.get(URL + `/users/${userid}/`)
-            .then(({data})=> userslistsearched.push(data))
-            .catch((error)=> console.log(error))
+    for (let user of userList){
+      let words=user.first_name.toLowerCase().split(" ");
+      for( let names of nameuserArray){
+        for(let word of words){
+            if(names==word){
+              usersfoundid.push(user.id)
+            }       
           }
-          
-        }})          
       }
     }
 
-    if(userslistsearched.length==0){
+    for (let x of usersfoundid){
+      axios
+      .get(URL + `/users/${x}/`)
+      .then(({data})=> userlistfound.push(data))
+      .catch((error)=> console.log(error))
+    }
+
+    console.log(userlistfound)
+
+    if(userlistfound.length=0){
+      console.log(userlistfound.length==0)
       setRenderuser(false)
+      setUserListSearched([])
     } {
       setRenderuser(true);
-      setUserListSearched(userslistsearched);
+      setUserListSearched(userlistfound);
     }
-  
+
   }
 
+  useEffect(()=>{},[userListSearched])
+  console.log(userListSearched)
 
   return (
     <>
