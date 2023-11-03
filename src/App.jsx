@@ -15,7 +15,7 @@ function App() {
   const [renderuser,setRenderuser]=useState(false);
 
 
-  const URL="https://users-crud.academlo.tech";
+  const URL="https://usersfullstack-dev-mzfz.3.us-1.fl0.io";
 
   const getAllUsers= ()=>{
     axios
